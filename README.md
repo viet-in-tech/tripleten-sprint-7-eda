@@ -29,6 +29,71 @@ All data sourced from SQL queries against a Chicago taxi database:
 
 ---
 
+## SQL Queries
+
+Three tables in a relational Chicago taxi database: `trips`, `cabs`, `weather_records`.
+
+### Query 1 — Rides per Taxi Company (Dataset 1)
+```sql
+SELECT
+    cabs.company_name,
+    COUNT(trips.trip_id) AS trips_amount
+FROM
+    cabs
+    INNER JOIN trips ON cabs.cab_id = trips.cab_id
+WHERE
+    CAST(trips.start_ts AS date) BETWEEN '2017-11-15' AND '2017-11-16'
+GROUP BY
+    cabs.company_name
+ORDER BY
+    trips_amount DESC
+```
+
+### Query 2 — Market Segmentation with CASE
+```sql
+SELECT
+    COUNT(trips.trip_id) AS trips_amount,
+    CASE
+        WHEN cabs.company_name = 'Flash Cab' THEN 'Flash Cab'
+        WHEN cabs.company_name = 'Taxi Affiliation Services' THEN 'Taxi Affiliation Services'
+        ELSE 'Other'
+    END AS company
+FROM
+    trips
+    INNER JOIN cabs ON cabs.cab_id = trips.cab_id
+WHERE
+    CAST(trips.start_ts AS date) BETWEEN '2017-11-01' AND '2017-11-07'
+GROUP BY
+    cabs.company_name = 'Flash Cab',
+    cabs.company_name = 'Taxi Affiliation Services'
+ORDER BY
+    trips_amount DESC
+```
+
+### Query 3 — Loop-to-O'Hare Saturday Rides with Weather (Dataset 3)
+```sql
+SELECT
+    trips.start_ts AS start_ts,
+    trips.duration_seconds,
+    CASE
+        WHEN weather_records.description LIKE '%rain%'
+          OR weather_records.description LIKE '%storm%' THEN 'Bad'
+        ELSE 'Good'
+    END AS weather_conditions
+FROM
+    trips
+INNER JOIN
+    weather_records ON weather_records.ts = trips.start_ts
+WHERE
+    EXTRACT(DOW FROM trips.start_ts) = 6   -- Saturday only
+    AND trips.pickup_location_id = 50       -- Loop
+    AND trips.dropoff_location_id = 63      -- O'Hare
+ORDER BY
+    trips.trip_id
+```
+
+---
+
 ## Workflow
 
 ### Phase 1 — Exploratory Data Analysis
