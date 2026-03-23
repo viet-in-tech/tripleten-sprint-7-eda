@@ -1,7 +1,7 @@
 # Chicago Taxi Market Analysis
 ### SQL, EDA & Hypothesis Testing
 
-**TripleTen Data Science Program · Sprint 7 — Exploratory Data Analysis**
+**TripleTen Data Science Program · Sprint 7 — SQL, EDA & Hypothesis Testing**
 
 **Completed:** November 3, 2025
 
@@ -97,11 +97,11 @@ Difference: **+413.9 seconds (6.9 minutes, +20.6%)** in bad weather.
 
 ## Technologies
 
+- **SQL** — data extraction from a relational Chicago taxi database (JOINs, aggregations, filtering)
 - Python 3.8
 - pandas, numpy
 - matplotlib, seaborn
 - scipy.stats (ttest_ind)
-- SQL (data collection)
 
 ---
 
