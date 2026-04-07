@@ -1,4 +1,6 @@
 # Chicago Taxi Market Analysis
+
+![Demo](https://viet-in-tech.github.io/chicago-taxi-demo.gif)
 ### SQL, EDA & Hypothesis Testing
 
 **TripleTen Data Science Program · Sprint 7 — SQL, EDA & Hypothesis Testing**
