@@ -3,6 +3,8 @@
 ![Demo](https://viet-in-tech.github.io/chicago-taxi-demo.gif)
 ### SQL, EDA & Hypothesis Testing
 
+**Portfolio write-up:** [Does Chicago Weather Tax Your Ride? SQL, EDA & Hypothesis Testing](https://viet-in-tech.github.io/chicago-taxi-eda.html)
+
 **TripleTen Data Science Program · Sprint 7 — SQL, EDA & Hypothesis Testing**
 
 **Completed:** November 3, 2025
@@ -122,8 +124,6 @@ Flash Cab led by ~71% over second place — significant market concentration.
 | 4 | West Loop | 5,163.7 |
 | 5 | O'Hare | 2,546.9 |
 
-The Loop dominated, reflecting Chicago's central business district demand.
-
 ### Phase 2 — Hypothesis Testing
 
 **Hypotheses:**
@@ -131,21 +131,14 @@ The Loop dominated, reflecting Chicago's central business district demand.
 - H₁: Average duration is longer in bad weather
 - α = 0.05
 
-**Data Cleaning:**
-- 1,068 total rides: Good weather (888), Bad weather (180)
-- Removed 6 good-weather rides with 0-second duration (data errors)
-- Final: Good weather n = 882, Bad weather n = 180
-
 **Descriptive Statistics:**
 
-| Weather | n | Mean | Mean (min) | Median | Std Dev |
-|---------|---|------|-----------|--------|---------|
-| Good | 882 | 2,013.3s | 33.6 min | 1,800.0s | 743.6 |
-| Bad | 180 | 2,427.2s | 40.5 min | 2,540.0s | 721.3 |
+| Weather | n | Mean | Mean (min) | Std Dev |
+|---------|---|------|-----------|---------|
+| Good | 882 | 2,013.3s | 33.6 min | 743.6 |
+| Bad | 180 | 2,427.2s | 40.5 min | 721.3 |
 
 Difference: **+413.9 seconds (6.9 minutes, +20.6%)** in bad weather.
-
-**Test:** Independent two-sample t-test (`scipy.stats.ttest_ind`)
 
 ---
 
@@ -158,16 +151,15 @@ Difference: **+413.9 seconds (6.9 minutes, +20.6%)** in bad weather.
 | Decision | **Reject H₀** |
 | Practical Effect | +6.9 min (+20.6%) |
 
-**Conclusion:** Bad weather statistically significantly increases Loop-to-O'Hare Saturday ride duration. The effect is both statistically significant (p ≪ α = 0.05) and practically meaningful (+20.6% longer on average).
+**Conclusion:** Bad weather statistically significantly increases Loop-to-O'Hare Saturday ride duration (p ≪ α = 0.05).
 
 ---
 
 ## Technologies
 
-- **SQL** — data extraction from a relational Chicago taxi database (JOINs, aggregations, filtering)
-- Python 3.8
-- pandas, numpy
-- matplotlib, seaborn
+- **SQL** — data extraction (JOINs, aggregations, CASE expressions)
+- Python 3.8 · pandas · numpy
+- matplotlib · seaborn
 - scipy.stats (ttest_ind)
 
 ---
